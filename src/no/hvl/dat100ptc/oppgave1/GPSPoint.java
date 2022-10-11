@@ -57,9 +57,7 @@ public class GPSPoint {
 
 	public void setLongitude(double longitude) {
 		this.longitude=longitude;
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
+				
 	}
 
 	public double getElevation() {
@@ -77,10 +75,10 @@ public class GPSPoint {
 	public String toString() {
 		
 		String str;
-		
+		str=getTime() + " (" + getLatitude()+ "," + getLongitude()+ ") " + getElevation()+ "\n";
+		return str;
 		// TODO - start
 
-		throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - slutt
 		
