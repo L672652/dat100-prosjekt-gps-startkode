@@ -19,20 +19,27 @@ public class GPSDataConverter {
 		
 		// TODO
 		// OPPGAVE - START
+		 
+		hr = Integer.parseInt(timestr.substring(TIME_STARTINDEX, TIME_STARTINDEX+2));
+		min = Integer.parseInt(timestr.substring(TIME_STARTINDEX+3, TIME_STARTINDEX+5));
+		sec = Integer.parseInt(timestr.substring(TIME_STARTINDEX+6, TIME_STARTINDEX+8));
 		
-		throw new UnsupportedOperationException(TODO.method());
-
+		
+		secs = (hr * 60*60) + (min * 60) + sec;
+		
+		return secs;
 		// OPPGAVE - SLUTT
 		
 	}
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
 
-		GPSPoint gpspoint;
 
 		// TODO - START ;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		GPSPoint gpspoint = new GPSPoint(toSeconds(timeStr),Double.parseDouble(latitudeStr),Double.parseDouble(longitudeStr),Double.parseDouble(elevationStr));
+		
+		return gpspoint;
 
 		// OPPGAVE - SLUTT ;
 	    
