@@ -16,7 +16,7 @@ public class GPSData {
 	public GPSPoint[] getGPSPoints() {
 		return this.gpspoints;
 	}
-	
+
 	protected boolean insertGPS(GPSPoint gpspoint) {
 
 		boolean inserted = false;
@@ -31,21 +31,17 @@ public class GPSData {
 
 	public boolean insert(String time, String latitude, String longitude, String elevation) {
 
-	//	GPSPoint gpspoint;
-		
-		GPSPoint gpspoint = new GPSPoint(time,latitude,longitude,elevation);
-	//	GPSPoint gpspoint = new GPSPoint(Integer.parseInt(time),Double.parseDouble(latitude),Double.parseDouble(longitude),Double.parseDouble(elevation));
+		GPSPoint gpspoint = GPSDataConverter.convert(time,latitude,longitude,elevation);
 
 		boolean inserted = insertGPS(gpspoint);
 
 		return inserted;
-		
+
 	}
 
 	public void print() {
 
 		System.out.println("====== Konvertert GPS Data - START ======");
-
 
 		for (GPSPoint gpspoints : gpspoints) {
 			System.out.println(gpspoints.toString());
