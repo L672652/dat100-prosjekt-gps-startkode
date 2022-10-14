@@ -57,10 +57,15 @@ public class GPSUtils {
 	}
 
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
+		
+		double[]longitudes=new double[gpspoints.length];
+		for(int u=0;u<longitudes.length;u++) {
+			longitudes[u]=gpspoints[u].getLongitude();			
+		}
+		return longitudes;
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 
