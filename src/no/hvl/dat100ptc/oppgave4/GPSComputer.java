@@ -30,10 +30,14 @@ public class GPSComputer {
 	public double totalDistance() {
 
 		double distance = 0;
+		for(int i=0;i<gpspoints.length-1;i++) {
+			distance+= GPSUtils.distance(gpspoints[i], gpspoints[i+1]);
+		}
+		return distance;
+		
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 
@@ -43,10 +47,17 @@ public class GPSComputer {
 	public double totalElevation() {
 
 		double elevation = 0;
+		for(int i=0;i<gpspoints.length-1;i++) {
+			
+			if(gpspoints[i].getElevation()<gpspoints[i+1].getElevation()) {
+				elevation+=gpspoints[i+1].getElevation()-gpspoints[i].getElevation();
+			}
+		}
+		return elevation;
+		
+		//for(i=0;i<)
 
 		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 
@@ -54,18 +65,26 @@ public class GPSComputer {
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
+		int time = gpspoints[gpspoints.length-1].getTime()-gpspoints[0].getTime();
+		
 
-		throw new UnsupportedOperationException(TODO.method());
+		return time;
+
 
 	}
 		
 	// beregn gjennomsnitshastighets mellom hver av gps punktene
 
 	public double[] speeds() {
+		double[] farter=new double[gpspoints.length-1];
+		for(int i=0;i<gpspoints.length-1;i++) {
+			farter[i]=GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
+			
+		}
+		return farter;
 		
 		// TODO - START		// OPPGAVE - START
 		
-		throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 
@@ -73,23 +92,26 @@ public class GPSComputer {
 	
 	public double maxSpeed() {
 		
-		double maxspeed = 0;
+		return GPSUtils.findMax(speeds());
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
 	}
 
 	public double averageSpeed() {
+		double distance=totalDistance();
+		double time=totalTime();
+		
+		
 
-		double average = 0;
+		return (distance/1000.0)/(time/60.0/60.0);
+		
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		

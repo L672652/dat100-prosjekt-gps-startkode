@@ -88,14 +88,15 @@ public class GPSUtils {
 
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
-		int secs;
-		double speed;
+		double kmt;
+		double distance;
+		double time=(gpspoint2.getTime()-gpspoint1.getTime())/60.0/60.0;
 
-		speed = distance(gpspoint1, gpspoint2) / 10;
+		distance = distance(gpspoint1, gpspoint2) / 1000;
 
-		secs = (int) ((speed) * 60 * 60) / 1000;
+		kmt=distance/time;
 
-		return secs;
+		return kmt;
 	}
 
 	public static String formatTime(int secs) {
