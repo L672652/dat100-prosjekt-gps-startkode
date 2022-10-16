@@ -2,6 +2,8 @@ package no.hvl.dat100ptc.oppgave3;
 
 import static java.lang.Math.*;
 
+import java.util.Locale;
+
 import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 
@@ -76,6 +78,7 @@ public class GPSUtils {
 
 		double a = (Math.pow(Math.sin(latTotal) / 2, 2))
 				+ (Math.cos(latitude1)) * (Math.cos(latitude2)) * (Math.pow(Math.sin(longTotal) / 2, 2));
+
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
 		d = R * c;
@@ -88,25 +91,30 @@ public class GPSUtils {
 		int secs;
 		double speed;
 
-		
-		speed = distance(gpspoint1,gpspoint2)/10;
-		
-		secs = (int)((speed)*60*60)/1000;
-		
-		
+		speed = distance(gpspoint1, gpspoint2) / 10;
+
+		secs = (int) ((speed) * 60 * 60) / 1000;
+
 		return secs;
 	}
 
 	public static String formatTime(int secs) {
 
-		String timestr;
+		String timestr = "";
 		String TIMESEP = ":";
 
-		// TODO - START
+		int hr = secs / 3600;
+		int min = (secs / 60) % 60;
+		int sec = secs % 60;
 
-		throw new UnsupportedOperationException(TODO.method());
+		String hh = String.format("%02d", hr);
+		String mm = String.format("%02d", min);
+		String ss = String.format("%02d", sec);
 
-		// TODO - SLUTT
+		timestr = hh + TIMESEP + mm + TIMESEP + ss;
+		timestr = String.format("%10s", timestr);
+
+		return timestr;
 
 	}
 
@@ -117,9 +125,8 @@ public class GPSUtils {
 		String str;
 
 		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
+		str = String.format("%10s", String.format(Locale.US,"%.2f", d));
+		return str;
 		// TODO - SLUTT
 
 	}
