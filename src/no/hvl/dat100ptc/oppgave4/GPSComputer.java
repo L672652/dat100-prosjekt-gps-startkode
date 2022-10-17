@@ -140,30 +140,32 @@ public class GPSComputer {
 
 		if (speedmph<10) {
 			met = 4.0;
-		} else if (speedmph<=10||speedmph>=12) {
+		} else if (speedmph>=10&&speedmph<12) {
 			met = 6.0;
-		} else if (speedmph<12||speedmph>=14) {
+		} else if (speedmph>=12&&speedmph<14) {
 			met = 8.0;
-		} else if (speedmph<14||speedmph>=16) {
+		} else if (speedmph>=14&&speedmph<16) {
 			met = 10.0;
-		}  else if (speedmph<16||speedmph>=20) {
+		}  else if (speedmph>=16&&speedmph<20) {
 			met = 12.0;
 		}else if (speedmph>20) {
 			met = 16.0;
 		}
 		
-		kcal = (met * weight * (secs/3600));
+		kcal = (met * weight * (secs/3600.0));
 		
 		return kcal;
 	}
 
 	public double totalKcal(double weight) {
+		int fullTid=totalTime();
+		double fullFart=averageSpeed();
 
-		double totalkcal = 0;
+		double totalkcal = kcal(weight,fullTid,fullFart);
+		return totalkcal;
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 		
@@ -172,12 +174,34 @@ public class GPSComputer {
 	private static double WEIGHT = 80.0;
 	
 	public void displayStatistics() {
+		int time=totalTime()/3600;
+		int minutt= (totalTime()-(3600*time))/60;
+		int sek= (totalTime()-(3600*time)-(60*minutt));
+		String visTime= "" +time;
+		String visMin="" + minutt;
+		String visSek="" + sek;
+		if(time<10) {
+			visTime="0" +time;
+		}
+		if(minutt<10) {
+			visMin="0"+ minutt;
+		}
+		if(sek<10) {
+			visSek="0" + sek;
+		}
+	
+		
 
 		System.out.println("==============================================");
+		System.out.println("Total Time 	   :  " + visTime + ":" + visMin + ":" + visSek  );
+		System.out.println("Total Distance :    " + totalDistance()+" km");
+		System.out.println("Total Elevation:     " + totalElevation() + " m");
+		System.out.println("Max Speed      :     " + maxSpeed() + " km/t" );
+		System.out.println("Average Speed  :     " + averageSpeed()+ " km/t");
+		System.out.println("Energy         :     "+ totalKcal(WEIGHT) + "kcal");
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
