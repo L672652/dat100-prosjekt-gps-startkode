@@ -173,7 +173,7 @@ public class GPSComputer {
 	
 	private static double WEIGHT = 80.0;
 	
-	public void displayStatistics() {
+	public String displayStatistics() {
 		int time=totalTime()/3600;
 		int minutt= (totalTime()-(3600*time))/60;
 		int sek= (totalTime()-(3600*time)-(60*minutt));
@@ -199,6 +199,7 @@ public class GPSComputer {
 		System.out.println("Max Speed      :     " + maxSpeed() + " km/t" );
 		System.out.println("Average Speed  :     " + averageSpeed()+ " km/t");
 		System.out.println("Energy         :     "+ totalKcal(WEIGHT) + "kcal");
+		return null;
 
 		// TODO - START
 
