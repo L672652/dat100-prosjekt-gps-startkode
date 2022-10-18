@@ -74,13 +74,35 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void showStatistics() {
+		int time = gpscomputer.totalTime() / 3600;
+		int minutt = (gpscomputer.totalTime() - (3600 * time)) / 60;
+		int sek = (gpscomputer.totalTime() - (3600 * time) - (60 * minutt));
+		String visTime = "" + time;
+		String visMin = "" + minutt;
+		String visSek = "" + sek;
+		if (time < 10) {
+			visTime = "0" + time;
+		}
+		if (minutt < 10) {
+			visMin = "0" + minutt;
+		}
+		if (sek < 10) {
+			visSek = "0" + sek;
+		}
 
 		int TEXTDISTANCE = 20;
 
 		setColor(0, 0, 0);
 		setFont("Courier", 12);
 
-		drawString(gpscomputer.displayStatistics(), 100, 100);
+		drawString(("=============================================="), 20, 20);
+		drawString(("Total Time 	   :  " + visTime + ":" + visMin + ":" + visSek),20,40);
+		drawString("Total Distance :    " + gpscomputer.totalDistance() + " km",20,60);
+		drawString(("Total Elevation:     " + gpscomputer.totalElevation() + " m"),20,80);
+		drawString("Max Speed      :     " + gpscomputer.maxSpeed() + " km/t",20,100);
+		drawString("Average Speed  :     " + gpscomputer.averageSpeed() + " km/t",20,120);
+		drawString("Energy         :     " + gpscomputer.totalKcal(80) + "kcal",20,140);
+		drawString("==============================================",20,160);
 	}
 
 }
