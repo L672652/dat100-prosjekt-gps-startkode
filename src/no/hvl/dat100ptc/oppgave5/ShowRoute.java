@@ -62,14 +62,45 @@ public class ShowRoute extends EasyGraphics {
 
 	}
 
-	public void showRouteMap(int ybase) {
+	// Oppgave løst ved mye hjelp fra Eirik fra gruppe 40
+	public void showRouteMap(int xbase) {
 
-		int x = MARGIN;
-		int y = ybase;
+		final int RADIUS = 4;
 
-		for (int i = 0; i < gpspoints.length; i++) {
-			setColor(0, 0, 255);
-			drawLine(x - (int)xstep(),y-(int)ystep(),10,10);
+		int convertedLongitude, convertedLatitude,convertedLongitude2,convertedLatitude2, x, y,x2,y2;
+
+		double elevation = 0;
+		double maxlon = GPSUtils.findMax(GPSUtils.getLongitudes(gpspoints));
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+
+		
+		 for (int i = 0; i<gpspoints.length-1; i++) {
+			 
+			GPSPoint startPoint = gpspoints[i];
+			GPSPoint endPoint = gpspoints[i+1];
+			convertedLongitude = (int) (((maxlon - startPoint.getLongitude()) * xstep()) + 0.5);
+			convertedLatitude = (int) (((maxlat - startPoint.getLatitude()) * ystep()) + 0.5);
+
+			convertedLongitude2 = (int) (((maxlon - endPoint.getLongitude()) * xstep()) + 0.5);
+			convertedLatitude2 = (int) (((maxlat - endPoint.getLatitude()) * ystep()) + 0.5);
+			
+			x = xbase - convertedLongitude;
+			y = MARGIN + convertedLatitude;
+
+			x2 = xbase - convertedLongitude2;
+			y2 = MARGIN + convertedLatitude2;
+			
+			if (startPoint.getElevation() > elevation) {
+				setColor(255, 0, 0);
+				elevation = startPoint.getElevation();
+			} else if (startPoint.getElevation() < elevation) {
+				setColor(0, 255, 0);
+				elevation = startPoint.getElevation();
+			} else
+				setColor(0, 0, 255);
+
+			fillCircle(x, y, RADIUS);
+			drawLine(x,y,x2,y2);
 		}
 	}
 
@@ -96,13 +127,13 @@ public class ShowRoute extends EasyGraphics {
 		setFont("Courier", 12);
 
 		drawString(("=============================================="), 20, 20);
-		drawString(("Total Time 	   :  " + visTime + ":" + visMin + ":" + visSek),20,40);
-		drawString("Total Distance :    " + gpscomputer.totalDistance() + " km",20,60);
-		drawString(("Total Elevation:     " + gpscomputer.totalElevation() + " m"),20,80);
-		drawString("Max Speed      :     " + gpscomputer.maxSpeed() + " km/t",20,100);
-		drawString("Average Speed  :     " + gpscomputer.averageSpeed() + " km/t",20,120);
-		drawString("Energy         :     " + gpscomputer.totalKcal(80) + "kcal",20,140);
-		drawString("==============================================",20,160);
+		drawString(("Total Time 	   :  " + visTime + ":" + visMin + ":" + visSek), 20, 40);
+		drawString("Total Distance :    " + gpscomputer.totalDistance() + " km", 20, 60);
+		drawString(("Total Elevation:     " + gpscomputer.totalElevation() + " m"), 20, 80);
+		drawString("Max Speed      :     " + gpscomputer.maxSpeed() + " km/t", 20, 100);
+		drawString("Average Speed  :     " + gpscomputer.averageSpeed() + " km/t", 20, 120);
+		drawString("Energy         :     " + gpscomputer.totalKcal(80) + "kcal", 20, 140);
+		drawString("==============================================", 20, 160);
 	}
 
 }
