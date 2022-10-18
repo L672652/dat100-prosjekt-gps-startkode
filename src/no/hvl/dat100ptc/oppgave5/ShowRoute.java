@@ -62,7 +62,7 @@ public class ShowRoute extends EasyGraphics {
 
 	}
 
-	// Oppgave løst ved mye hjelp fra Eirik fra gruppe 40
+	// Oppgave løst ved hjelp fra Eirik fra gruppe 40
 	public void showRouteMap(int xbase) {
 
 		final int RADIUS = 4;
