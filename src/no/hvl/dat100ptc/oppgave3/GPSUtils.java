@@ -90,11 +90,11 @@ public class GPSUtils {
 
 		double kmt;
 		double distance;
-		double time=(gpspoint2.getTime()-gpspoint1.getTime())/60.0/60.0;
+		double time = (gpspoint2.getTime() - gpspoint1.getTime()) / 60.0 / 60.0;
 
 		distance = distance(gpspoint1, gpspoint2) / 1000;
 
-		kmt=distance/time;
+		kmt = distance / time;
 
 		return kmt;
 	}
@@ -126,7 +126,7 @@ public class GPSUtils {
 		String str;
 
 		// TODO - START
-		str = String.format("%10s", String.format(Locale.US,"%.2f", d));
+		str = String.format("%10s", String.format(Locale.US, "%.2f", d));
 		return str;
 		// TODO - SLUTT
 
