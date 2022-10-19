@@ -67,29 +67,29 @@ public class ShowRoute extends EasyGraphics {
 
 		final int RADIUS = 4;
 
-		int convertedLongitude, convertedLatitude,convertedLongitude2,convertedLatitude2, x, y,x2,y2;
+		int convertedLongitudeStart, convertedLatitudeStart, convertedLongitudeEnd, convertedLatitudeEnd, xStart,
+				yStart, xEnd, yEnd;
 
 		double elevation = 0;
 		double maxlon = GPSUtils.findMax(GPSUtils.getLongitudes(gpspoints));
 		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
 
-		
-		 for (int i = 0; i<gpspoints.length-1; i++) {
-			 
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+
 			GPSPoint startPoint = gpspoints[i];
-			GPSPoint endPoint = gpspoints[i+1];
-			convertedLongitude = (int) (((maxlon - startPoint.getLongitude()) * xstep()) + 0.5);
-			convertedLatitude = (int) (((maxlat - startPoint.getLatitude()) * ystep()) + 0.5);
+			GPSPoint endPoint = gpspoints[i + 1];
+			convertedLongitudeStart = (int) (((maxlon - startPoint.getLongitude()) * xstep()) + 0.5);
+			convertedLatitudeStart = (int) (((maxlat - startPoint.getLatitude()) * ystep()) + 0.5);
 
-			convertedLongitude2 = (int) (((maxlon - endPoint.getLongitude()) * xstep()) + 0.5);
-			convertedLatitude2 = (int) (((maxlat - endPoint.getLatitude()) * ystep()) + 0.5);
-			
-			x = xbase - convertedLongitude;
-			y = MARGIN + convertedLatitude;
+			convertedLongitudeEnd = (int) (((maxlon - endPoint.getLongitude()) * xstep()) + 0.5);
+			convertedLatitudeEnd = (int) (((maxlat - endPoint.getLatitude()) * ystep()) + 0.5);
 
-			x2 = xbase - convertedLongitude2;
-			y2 = MARGIN + convertedLatitude2;
-			
+			xStart = xbase - convertedLongitudeStart;
+			yStart = MARGIN + convertedLatitudeStart;
+
+			xEnd = xbase - convertedLongitudeEnd;
+			yEnd = MARGIN + convertedLatitudeEnd;
+
 			if (startPoint.getElevation() > elevation) {
 				setColor(255, 0, 0);
 				elevation = startPoint.getElevation();
@@ -99,8 +99,8 @@ public class ShowRoute extends EasyGraphics {
 			} else
 				setColor(0, 0, 255);
 
-			fillCircle(x, y, RADIUS);
-			drawLine(x,y,x2,y2);
+			fillCircle(xStart, yStart, RADIUS);
+			drawLine(xStart, yStart, xEnd, yEnd);
 		}
 	}
 
